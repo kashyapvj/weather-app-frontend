@@ -1,6 +1,6 @@
 import { Card } from 'antd';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import {getWeatherData, checkHealth} from './../api';
 
 const WeatherDetails = ({selectedCountry,
                         selectedCity,
@@ -14,7 +14,7 @@ const WeatherDetails = ({selectedCountry,
     useEffect(() => {
         const fetchWeatherData = async () => {
           setLoading(true);
-          axios.get(`http://localhost:8080/weather/${selectedCity}`)
+          getWeatherData(selectedCity)
           .then((response)=>  {
             setWeatherData(response.data)
           }).catch((error) => {
@@ -23,12 +23,33 @@ const WeatherDetails = ({selectedCountry,
             setLoading(false);
             setFetchData(false);
           })
-          }
+       }
 
         if (fetchData) {
           fetchWeatherData();
         }
   }, [fetchData]);
+
+  useEffect(() => {
+    const checkApiHealth = () => {
+        checkHealth()
+        .then((response)=> {
+            console.log("OK");
+        }).catch((error) => {
+            console.log("error");
+        })
+    }
+
+    checkApiHealth();
+
+    const intervalId = setInterval(() => {
+      checkApiHealth();
+    }, 600000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
     return (
         <div>
