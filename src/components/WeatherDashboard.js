@@ -7,15 +7,22 @@ const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState(undefined);
   const [fetchData, setFetchData] = useState(false);
   const [weatherData, setWeatherData] = useState(undefined);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   return (
     <div className="w-1/2 mx-auto mt-8">
+
         <CountryStateDropdown selectedCountry={selectedCountry}
                               setSelectedCountry={setSelectedCountry}
                               selectedCity = {selectedCity}
                               setSelectedCity = {setSelectedCity}
                               setFetchData = {setFetchData}
                               setWeatherData = {setWeatherData}
+                              setIsError = {setIsError}
+                              setIsLoading = {setIsLoading}
+                              isLoading  = {isLoading}
         />
 
         <div className="mt-10">
@@ -25,6 +32,10 @@ const WeatherDashboard = () => {
                             setFetchData = {setFetchData}
                             setWeatherData = {setWeatherData}
                             weatherData = {weatherData}
+                            isError = {isError}
+                            setIsError = {setIsError}
+                            setIsLoading = {setIsLoading}
+                            isLoading = {isLoading}
             />
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, Alert } from 'antd';
 import { useState, useEffect } from 'react';
 import {getWeatherData, checkHealth} from './../api';
 
@@ -8,19 +8,24 @@ const WeatherDetails = ({selectedCountry,
                         setFetchData,
                         setWeatherData,
                         weatherData,
+                        setIsError,
+                        isError,
+                        setIsLoading,
+                        isLoading,
+
     }) => {
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchWeatherData = async () => {
-          setLoading(true);
+          setIsLoading(true);
           getWeatherData(selectedCity)
           .then((response)=>  {
             setWeatherData(response.data)
           }).catch((error) => {
             console.log(error);
+            setIsError(true);
           }).finally(()=> {
-            setLoading(false);
+            setIsLoading(false);
             setFetchData(false);
           })
        }
@@ -53,8 +58,8 @@ const WeatherDetails = ({selectedCountry,
 
     return (
         <div>
-        { weatherData && (
-            <Card hoverable title = {selectedCity} loading={loading} >
+        { !isError && weatherData && (
+            <Card hoverable title = {selectedCity} loading={isLoading} >
                 <div>
                     <div className='flex flex-row'>
                         <p className='font-bold'> Temperature: </p>
@@ -67,6 +72,15 @@ const WeatherDetails = ({selectedCountry,
                     </div>
                 </div>
             </Card>
+        )}
+
+        {isError && (
+            <Alert
+                message="Error"
+                description="Unable to fetch Data, Please retry later"
+                type="error"
+                showIcon
+            />
         )}
         </div>
     );

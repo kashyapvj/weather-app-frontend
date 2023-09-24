@@ -8,12 +8,14 @@ const CountryStateDropdown = ({ selectedCountry,
                                 setSelectedCity,
                                 setFetchData,
                                 setWeatherData,
+                                setIsError,
+                                setIsLoading,
+                                isLoading,
   }) => {
 
   const [isSubmit, setIsSubmit] = useState(false);
   const [allCountries, setAllCountries] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
-
 
   useEffect(() => {
     setAllCountries(Country.getAllCountries())
@@ -24,6 +26,7 @@ const CountryStateDropdown = ({ selectedCountry,
     setCityOptions(City.getCitiesOfCountry(option.data.isoCode));
     setSelectedCity(undefined);
     setIsSubmit(false);
+    setIsError(false);
     setFetchData(false);
     setWeatherData(undefined);
   };
@@ -32,11 +35,14 @@ const CountryStateDropdown = ({ selectedCountry,
     setSelectedCity(value);
     setWeatherData(undefined);
     setFetchData(false);
+    setIsError(false);
     setIsSubmit(true);
   };
 
   const handleSubmit = (value) => {
     setFetchData(true)
+    setIsError(false);
+    setIsLoading(true);
     setWeatherData(undefined);
   };
 
@@ -120,7 +126,7 @@ const CountryStateDropdown = ({ selectedCountry,
        </div>
 
        <div className='mt-4'>
-            <Button type='primary' onClick={handleSubmit} disabled= {!isSubmit} >Submit </Button>
+            <Button type='primary' onClick={handleSubmit} disabled= {!isSubmit} loading={isLoading}>Submit </Button>
        </div>
 
       </div>
