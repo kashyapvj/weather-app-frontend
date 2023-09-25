@@ -13,17 +13,22 @@ const WeatherDashboard = () => {
 
   return (
     <div className="w-1/2 mx-auto mt-8">
+        <div className="w-1/2 mx-auto">
+            <p className="text-3xl font-bold"> Weather App</p>
+        </div>
 
-        <CountryStateDropdown selectedCountry={selectedCountry}
-                              setSelectedCountry={setSelectedCountry}
-                              selectedCity = {selectedCity}
-                              setSelectedCity = {setSelectedCity}
-                              setFetchData = {setFetchData}
-                              setWeatherData = {setWeatherData}
-                              setIsError = {setIsError}
-                              setIsLoading = {setIsLoading}
-                              isLoading  = {isLoading}
-        />
+        <div className="mt-10">
+            <CountryStateDropdown selectedCountry={selectedCountry}
+                                  setSelectedCountry={setSelectedCountry}
+                                  selectedCity = {selectedCity}
+                                  setSelectedCity = {setSelectedCity}
+                                  setFetchData = {setFetchData}
+                                  setWeatherData = {setWeatherData}
+                                  setIsError = {setIsError}
+                                  setIsLoading = {setIsLoading}
+                                  isLoading  = {isLoading}
+            />
+        </div>
 
         <div className="mt-10">
             <WeatherDetails selectedCountry={selectedCountry}

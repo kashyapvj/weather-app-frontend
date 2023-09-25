@@ -90,7 +90,7 @@ const CountryStateDropdown = ({ selectedCountry,
 
   const SelectCity = () => {
     return (
-        <div className='mx-4 w-full md:w-1/2'>
+        <div className='mx-4 w-full mt-6 md:w-1/2 md:mt-0' >
             { selectedCountry &&
              (
              <div className="flex items-center">
@@ -120,12 +120,12 @@ const CountryStateDropdown = ({ selectedCountry,
   return (
     <div>
       <div>
-        <div className = 'md:flex flex-row'>
+        <div className = 'md:flex'>
            <SelectCountry/>
             <SelectCity/>
        </div>
 
-       <div className='mt-4'>
+       <div className='mt-6'>
             <Button type='primary' onClick={handleSubmit} disabled= {!isSubmit} loading={isLoading}>Submit </Button>
        </div>
 
