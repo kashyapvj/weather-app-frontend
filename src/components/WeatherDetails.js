@@ -86,4 +86,5 @@ const WeatherDetails = ({selectedCountry,
     );
 };
 
+
 export default WeatherDetails;
