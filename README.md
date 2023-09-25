@@ -16,3 +16,9 @@
 ## Weather Data
 
 - Once the weather data will be fetched from backend it will be shown in a card with city name and current temperature and humidity.
+
+## How to run application
+
+- `npm install` -> run to download all dependencies
+- `npm start` -> to run application
+- application will start at port 3000
